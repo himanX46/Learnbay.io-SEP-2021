@@ -1,1 +1,1 @@
-Class cosing exercises
+Class coding exercises
