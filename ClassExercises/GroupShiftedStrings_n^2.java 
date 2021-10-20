@@ -1,0 +1,35 @@
+public class Solution {
+    /**
+     * @param strings: a string array
+     * @return: return a list of string array
+     */
+    public List<List<String>> groupStrings(String[] strings) {
+        Map<String,List<String>> hmap = new HashMap<>();
+        for(String str : strings){
+            String key = findKey(str);
+            if(hmap.containsKey(key)){
+                List<String> list = new ArrayList<>();
+                list = hmap.get(key);
+                list.add(str);
+                hmap.put(key,list);
+            }else{
+                List<String> list = new ArrayList<>();
+                list.add(str);
+                hmap.put(key,list);
+            }
+        }
+        List<List<String>> res = new ArrayList<>(hmap.values());
+        return res;
+    }
+    public static String findKey(String str){
+        StringBuilder key = new StringBuilder();
+        for(int i=1;i<str.length();i++){
+            char curr = str.charAt(i);
+            char prev = str.charAt(i-1);
+            int diff = ((curr-prev)>0?(curr-prev):(26+(curr-prev)));
+            key.append(diff);
+            key.append("#");
+        }
+        return key.toString();
+    }
+}
